@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GridLab &middot; Electrical Power Distribution Systems Explorer</title>
+<meta name="description" content="Interactive educational explorer for electrical power distribution systems, network classifications, and the influence of working voltage on feeder and distributor design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="topbar">
+  <a class="brand" href="#overview">
+    <span class="logo">&#9889;</span>
+    <span class="brand-txt"><b>GridLab</b><small>Distribution Systems Explorer</small></span>
+  </a>
+  <nav class="nav" id="nav">
+    <a href="#overview">Overview</a>
+    <a href="#theory">Theory</a>
+    <a href="#classification">Classification</a>
+    <a href="#network">Network Explorer</a>
+    <a href="#voltagelab">Voltage Lab</a>
+    <a href="#calculations">Calculations</a>
+    <a href="#resources">Resources</a>
+    <a href="#about">About</a>
+  </nav>
+  <div class="topbar-actions">
+    <button class="theme-btn" id="themeBtn" title="Toggle light / dark theme" aria-label="Toggle theme">&#9788;</button>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">&#9776;</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= OVERVIEW ================= -->
+<section id="overview" class="section hero">
+  <div class="wrap">
+    <div class="hero-head reveal">
+      <span class="tag" id="heroTag">Power Systems &middot; Interactive Lab</span>
+      <h1>Classification of Distribution Systems &amp; the Influence of <span class="accent">Working Voltage</span></h1>
+      <p class="hero-sub">An interactive engineering explorer of how electrical energy is distributed &mdash; and why the choice of working voltage shapes conductor size, power loss, and voltage regulation in feeders and distributors.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#voltagelab">&#128200; Open Voltage Lab</a>
+        <a class="btn btn-ghost" href="#network">&#128268; Explore Networks</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap reveal">
+    <div class="card diagram-card">
+      <div class="card-head">
+        <h2>Power system &mdash; from generation to consumer</h2>
+        <p class="muted">Click any stage to inspect its function, typical voltage, and role. Voltages shown are common nominal values; actual levels vary by utility and application.</p>
+      </div>
+      <div id="sysDiagram" class="sys-diagram"></div>
+      <div id="sysInfo" class="info-panel">
+        <h3>Select a stage</h3>
+        <p class="muted">Click a node above to see its function, typical characteristics, and role in the network.</p>
+      </div>
+      <div class="legend-row">
+        <span class="leg"><i class="dot gen"></i> Generation</span>
+        <span class="leg"><i class="dot trans"></i> Transmission</span>
+        <span class="leg"><i class="dot prim"></i> Primary distribution</span>
+        <span class="leg"><i class="dot sec"></i> Secondary distribution</span>
+        <span class="leg"><i class="dot load"></i> Consumer</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap reveal">
+    <div class="stat-row">
+      <div class="card stat"><div class="num" data-count="3">0</div><div class="lbl">Power system stages</div></div>
+      <div class="card stat"><div class="num" data-count="3">0</div><div class="lbl">Network schemes</div></div>
+      <div class="card stat"><div class="num" data-count="2">0</div><div class="lbl">Distribution levels</div></div>
+      <div class="card stat"><div class="num" data-count="4">0</div><div class="lbl">Classification axes</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THEORY ================= -->
+<section id="theory" class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Foundation</span>
+      <h2>What is an electrical distribution system?</h2>
+    </div>
+    <div class="grid-2 reveal">
+      <div class="card">
+        <p>An electrical power system has three main stages &mdash; <b>generation</b>, <b>transmission</b>, and <b>distribution</b>. Energy is generated at power stations, transmitted over long distances at high voltage, and delivered to consumers through the distribution network.</p>
+        <p class="mt">The <b>distribution system</b> is the part of the power system that delivers energy from distribution substations to domestic, commercial, and industrial consumers. It includes feeders, distributors, service mains, transformers, and protective equipment.</p>
+        <p class="mt">Its objective is to provide a <b>reliable, safe, and economical</b> supply while keeping voltage within permissible limits.</p>
+      </div>
+      <div class="card">
+        <h3 class="mini">Transmission vs distribution levels</h3>
+        <table class="mini-table">
+          <thead><tr><th>Stage</th><th>Typical voltage</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Transmission</td><td>High (kV &ndash; hundreds of kV)</td><td>Bulk, long-distance transfer</td></tr>
+            <tr><td>Primary distribution</td><td>Medium (e.g. 11&nbsp;kV, 33&nbsp;kV)</td><td>Feeder from substation to area</td></tr>
+            <tr><td>Secondary distribution</td><td>Low (e.g. 415&nbsp;V, 230&nbsp;V)</td><td>Supply to consumers</td></tr>
+          </tbody>
+        </table>
+        <p class="muted small mt">Nominal values are illustrative. Actual voltage levels and network arrangements vary by utility and application.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal mt-lg">
+      <span class="eyebrow">Anatomy</span>
+      <h2>Feeders, distributors &amp; service mains</h2>
+    </div>
+    <div class="grid-3 reveal">
+      <div class="card comp">
+        <div class="ico">&#9889;</div>
+        <h3>Feeders</h3>
+        <p>Carry power from the distribution substation to distribution points. No consumer is tapped along the route. Sized primarily by <b>current-carrying capacity</b> and permissible voltage drop.</p>
+      </div>
+      <div class="card comp">
+        <div class="ico">&#128268;</div>
+        <h3>Distributors</h3>
+        <p>Have consumer connections tapped along their length, so current varies along the line. Designed mainly to keep <b>consumer terminal voltage</b> within permissible limits.</p>
+      </div>
+      <div class="card comp">
+        <div class="ico">&#127968;</div>
+        <h3>Service mains</h3>
+        <p>The final connection from a distributor to an individual consumer's premises. Sized by the consumer's load, current capacity, and voltage-drop limits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLASSIFICATION ================= -->
+<section id="classification" class="section alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Taxonomy</span>
+      <h2>Classification of distribution systems</h2>
+      <p class="lead">Distribution systems are classified along four axes. Choose an axis, then a category, to see its definition, an interactive schematic, operating principles, advantages, disadvantages, and applications.</p>
+    </div>
+
+    <div class="class-axis reveal" id="classAxis"></div>
+    <div class="class-body reveal" id="classBody"></div>
+  </div>
+</section>
+
+<!-- ================= NETWORK EXPLORER ================= -->
+<section id="network" class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Simulation</span>
+      <h2>Network explorer &mdash; radial, ring main &amp; interconnected</h2>
+      <p class="lead">Switch between network arrangements and simulate a line outage to see how supply continuity depends on <b>available alternative paths, switching, and protection</b> &mdash; not on the topology name alone.</p>
+    </div>
+
+    <div class="net-controls reveal">
+      <div class="seg" id="netSeg">
+        <button class="seg-btn active" data-net="radial">Radial</button>
+        <button class="seg-btn" data-net="ring">Ring main</button>
+        <button class="seg-btn" data-net="mesh">Interconnected</button>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="faultToggle">
+        <span class="slider"></span>
+        <span class="switch-lbl">Simulate a line outage</span>
+      </label>
+    </div>
+
+    <div class="card reveal net-card">
+      <div class="net-grid">
+        <div class="net-svg-wrap"><div id="netDiagram"></div></div>
+        <div class="net-info">
+          <div id="netInfo"></div>
+          <div id="eventLog" class="event-log"><span class="muted">Event log will appear here when a fault is simulated.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VOLTAGE LAB ================= -->
+<section id="voltagelab" class="section alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Interactive Lab</span>
+      <h2>Working voltage laboratory</h2>
+      <p class="lead">For a fixed power demand, raising the working voltage lowers the current required. Adjust the inputs and watch current, resistive loss, voltage drop, and efficiency update instantly &mdash; for single-phase or balanced three-phase AC.</p>
+    </div>
+
+    <div class="lab-grid reveal">
+      <!-- Controls -->
+      <div class="card lab-panel">
+        <h3 class="mini">Inputs</h3>
+
+        <div class="ctrl">
+          <label for="vlP">Active power <b><span id="vlPv">100</span> kW</b></label>
+          <input type="range" id="vlP" min="1" max="2000" step="1" value="100">
+        </div>
+
+        <div class="ctrl">
+          <label for="vlPhase">System</label>
+          <select id="vlPhase">
+            <option value="3" selected>Three-phase (line-to-line voltage)</option>
+            <option value="1">Single-phase</option>
+          </select>
+        </div>
+
+        <div class="ctrl">
+          <label for="vlV">Working voltage <b><span id="vlVv">400</span> V</b></label>
+          <input type="range" id="vlV" min="0" max="100" step="0.1" value="15.3">
+          <div class="chips" id="vlChips">
+            <button class="chipbtn" data-v="230">230 V</button>
+            <button class="chipbtn" data-v="400">400 V</button>
+            <button class="chipbtn" data-v="415">415 V</button>
+            <button class="chipbtn" data-v="3300">3.3 kV</button>
+            <button class="chipbtn" data-v="6600">6.6 kV</button>
+            <button class="chipbtn" data-v="11000">11 kV</button>
+            <button class="chipbtn" data-v="33000">33 kV</button>
+          </div>
+        </div>
+
+        <div class="ctrl">
+          <label for="vlPF">Power factor <b>cos&#966; = <span id="vlPFv">0.80</span></b></label>
+          <input type="range" id="vlPF" min="0.1" max="1" step="0.01" value="0.8">
+        </div>
+
+        <div class="ctrl">
+          <label for="vlR">Conductor resistance <b><span id="vlRv">0.10</span> &#937;</b></label>
+          <input type="range" id="vlR" min="0.01" max="2" step="0.01" value="0.1">
+          <p class="hint" id="vlRnote">Per-phase resistance (three-phase) / total loop resistance (single-phase).</p>
+        </div>
+
+        <div class="assumption">
+          <b>Assumptions:</b> steady-state balanced operation; reactance neglected so voltage drop is approximated by the resistive component only; resistance treated as constant. Real installations require conductor tables, temperature correction, and standards data.
+        </div>
+      </div>
+
+      <!-- Readouts + charts -->
+      <div class="lab-out">
+        <div class="readout" id="vlReadout">
+          <div class="ro">
+            <div class="cap">Line current <span id="vlIcap">I&#8343;</span></div>
+            <div class="big"><span id="vlI">180.4</span> <span class="unit">A</span></div>
+          </div>
+          <div class="ro" id="vlLossRo">
+            <div class="cap">Resistive loss</div>
+            <div class="big"><span id="vlLoss">9.77</span> <span class="unit" id="vlLossU">kW</span></div>
+          </div>
+          <div class="ro">
+            <div class="cap">Voltage drop</div>
+            <div class="big"><span id="vlDrop">3.1</span> <span class="unit">%</span></div>
+            <div class="note" id="vlDropV">&#8776; 0 V line-to-line</div>
+          </div>
+          <div class="ro">
+            <div class="cap">Efficiency</div>
+            <div class="big"><span id="vlEff">99.0</span> <span class="unit">%</span></div>
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="chart-head">
+            <h3 class="mini">Current vs working voltage</h3>
+            <span class="badge-soft" id="vlChart1Badge">fixed P, cos&#966;</span>
+          </div>
+          <div class="chart-box"><canvas id="vlChart1"></canvas></div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="chart-head">
+            <h3 class="mini">Resistive loss vs working voltage</h3>
+            <span class="badge-soft">P<sub>loss</sub> &prop; V&#8315;&sup2;</span>
+          </div>
+          <div class="chart-box"><canvas id="vlChart2"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CALCULATIONS ================= -->
+<section id="calculations" class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Design lab</span>
+      <h2>Feeder &amp; distributor design</h2>
+      <p class="lead">Estimate conductor resistance, voltage drop, and losses for a run, and check whether the drop is within a permissible limit. <b>Results are educational estimates</b> &mdash; a real design must also satisfy ampacity, short-circuit, mechanical, and installation standards.</p>
+    </div>
+
+    <div class="lab-grid reveal">
+      <div class="card lab-panel">
+        <h3 class="mini">Conductor &amp; load inputs</h3>
+
+        <div class="ctrl">
+          <label for="fdP">Load power <b><span id="fdPv">50</span> kW</b></label>
+          <input type="range" id="fdP" min="1" max="1000" step="1" value="50">
+        </div>
+        <div class="ctrl">
+          <label for="fdV">Working voltage <b><span id="fdVv">400</span> V</b></label>
+          <input type="range" id="fdV" min="0" max="100" step="0.1" value="15.3">
+          <div class="chips" id="fdChips">
+            <button class="chipbtn" data-v="230">230 V</button>
+            <button class="chipbtn" data-v="400">400 V</button>
+            <button class="chipbtn" data-v="415">415 V</button>
+            <button class="chipbtn" data-v="3300">3.3 kV</button>
+            <button class="chipbtn" data-v="11000">11 kV</button>
+          </div>
+        </div>
+        <div class="ctrl">
+          <label for="fdLen">Route length <b><span id="fdLenv">200</span> m</b></label>
+          <input type="range" id="fdLen" min="1" max="2000" step="1" value="200">
+        </div>
+        <div class="ctrl">
+          <label for="fdPF">Power factor <b>cos&#966; = <span id="fdPFv">0.80</span></b></label>
+          <input type="range" id="fdPF" min="0.1" max="1" step="0.01" value="0.8">
+        </div>
+
+        <div class="input-2col">
+          <div class="ctrl">
+            <label for="fdMat">Conductor material</label>
+            <select id="fdMat">
+              <option value="cu" selected>Copper (Cu)</option>
+              <option value="al">Aluminium (Al)</option>
+            </select>
+          </div>
+          <div class="ctrl">
+            <label for="fdArea">Cross-section <b><span id="fdAreav">16</span> mm&sup2;</b></label>
+            <input type="range" id="fdArea" min="1" max="300" step="1" value="16">
+          </div>
+        </div>
+
+        <div class="input-2col">
+          <div class="ctrl">
+            <label for="fdTemp">Conductor temp. <b><span id="fdTempv">70</span> &deg;C</b></label>
+            <input type="range" id="fdTemp" min="20" max="90" step="1" value="70">
+          </div>
+          <div class="ctrl">
+            <label for="fdLimit">Permissible drop <b><span id="fdLimitv">5</span> %</b></label>
+            <input type="range" id="fdLimit" min="1" max="10" step="0.5" value="5">
+          </div>
+        </div>
+      </div>
+
+      <div class="lab-out">
+        <div class="readout">
+          <div class="ro">
+            <div class="cap">Line current</div>
+            <div class="big"><span id="fdI">90.2</span> <span class="unit">A</span></div>
+          </div>
+          <div class="ro">
+            <div class="cap">Conductor resistance</div>
+            <div class="big"><span id="fdR">0.126</span> <span class="unit">&#937;</span></div>
+            <div class="note" id="fdRnote">temperature-corrected</div>
+          </div>
+          <div class="ro">
+            <div class="cap">Voltage drop</div>
+            <div class="big"><span id="fdDrop">3.1</span> <span class="unit">%</span></div>
+            <div class="note" id="fdDropV">&#8776; 0 V</div>
+          </div>
+          <div class="ro" id="fdLossRo">
+            <div class="cap">Resistive loss</div>
+            <div class="big"><span id="fdLoss">1.05</span> <span class="unit" id="fdLossU">kW</span></div>
+          </div>
+        </div>
+
+        <div class="card verdict" id="fdVerdict">
+          <span class="v-ico">&#10004;</span>
+          <div>
+            <b id="fdVerdictTitle">Within permissible drop</b>
+            <p class="muted small" id="fdVerdictMsg">Estimated voltage drop is within the configured limit. This is not a safety verification.</p>
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="chart-head">
+            <h3 class="mini">Voltage drop vs cross-section</h3>
+            <span class="badge-soft" id="fdAreaBadge">current conductor marked</span>
+          </div>
+          <div class="chart-box"><canvas id="fdChart"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Distributor multi-load profile -->
+    <div class="card reveal mt-lg" id="distCard">
+      <div class="card-head">
+        <h2>Distributor with multiple tapped loads</h2>
+        <p class="muted">Unlike a feeder, a distributor is tapped along its length. Current decreases in steps toward the far end, and voltage falls progressively. Edit the three loads below.</p>
+      </div>
+      <div class="dist-grid">
+        <div class="dist-inputs" id="distInputs"></div>
+        <div class="chart-box tall"><canvas id="distChart"></canvas></div>
+      </div>
+      <p class="muted small" id="distSummary"></p>
+    </div>
+
+    <!-- Worked examples -->
+    <div class="sec-head reveal mt-lg">
+      <span class="eyebrow">Step by step</span>
+      <h2>Numerical examples</h2>
+      <p class="lead">Three worked examples with given data, formula, calculation, and engineering interpretation. Values are calculated live and independently recomputed above.</p>
+    </div>
+    <div class="examples reveal" id="examples"></div>
+  </div>
+</section>
+
+<!-- ================= RESOURCES ================= -->
+<section id="resources" class="section alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Reference</span>
+      <h2>Learning &amp; report resources</h2>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card">
+        <h3 class="mini">Formula reference</h3>
+        <ul class="formula-list" id="formulaList"></ul>
+      </div>
+      <div class="card">
+        <h3 class="mini">Glossary</h3>
+        <ul class="glossary" id="glossary"></ul>
+      </div>
+    </div>
+
+    <div class="grid-2 reveal mt">
+      <div class="card">
+        <h3 class="mini">Project report &amp; notes</h3>
+        <p class="muted small">The accompanying university report and the formula sheet are available below.</p>
+        <div class="dl-row">
+          <a class="btn btn-primary" id="reportLink" href="report/PowerSystems_ReportV1.pdf" download>&#128196; Download report (PDF)</a>
+          <button class="btn btn-ghost" id="notesBtn">&#128190; Download formula sheet (.txt)</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3 class="mini">References</h3>
+        <ol class="refs">
+          <li>V. K. Mehta and Rohit Mehta, <i>Principles of Power System</i>, S. Chand Publishing.</li>
+          <li>C. L. Wadhwa, <i>Electrical Power Systems</i>, New Age International Publishers.</li>
+          <li>B. R. Gupta, <i>Power System Analysis and Design</i>, S. Chand Publishing.</li>
+          <li>Electrical distribution course notes, Department of EEE, C. V. Raman Global University.</li>
+        </ol>
+        <p class="muted small mt">No standards, ratings, or citations are fabricated. Where manufacturer or standards data is required, results are labelled as educational estimates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Project identity</span>
+      <h2>About this project</h2>
+    </div>
+
+    <div class="about-grid reveal">
+      <div class="card about-main">
+        <p id="aboutIntro"></p>
+        <p class="muted mt" id="aboutScope"></p>
+        <div class="guide-badge">
+          <span class="g-ico">&#127891;</span>
+          <div><small>Guided by</small><b id="guideName"></b></div>
+        </div>
+        <div class="link-row">
+          <a class="btn btn-primary" id="repoLink" href="#" target="_blank" rel="noopener">&#128279; GitHub repository</a>
+          <a class="btn btn-ghost" id="siteLink" href="#" target="_blank" rel="noopener">&#127760; Live site</a>
+        </div>
+      </div>
+      <div class="card qr-card">
+        <h3 class="mini">Scan to open</h3>
+        <div id="qrBox" class="qr-box"></div>
+        <p class="muted small" id="qrCaption">QR code for the deployed website.</p>
+      </div>
+    </div>
+
+    <div class="sec-head reveal mt-lg">
+      <span class="eyebrow" id="teamEyebrow">Team</span>
+      <h2 id="teamHeading">Group 3</h2>
+    </div>
+    <div class="team-grid reveal" id="teamGrid"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="foot-title">GridLab &mdash; Electrical Power Distribution Systems Explorer</p>
+    <p id="footLine" class="muted"></p>
+    <p class="muted small">Educational use only. This tool supports learning and does not replace professional engineering design or standards-based verification.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="config.js"></script>
+<script src="script.js"></script>
+<script src="js/voltagelab.js"></script>
+<script src="js/feederlab.js"></script>
+</body>
+</html>

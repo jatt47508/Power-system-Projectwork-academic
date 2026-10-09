@@ -1,0 +1,16 @@
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local server / python
+__pycache__/
+*.pyc
+
+# Keep report tracked but ignore duplicates
+# (report PDF is meant to be shared)
