@@ -14,3 +14,6 @@ __pycache__/
 
 # Keep report tracked but ignore duplicates
 # (report PDF is meant to be shared)
+
+# Personal report / documents (keep private, share directly with faculty)
+report/

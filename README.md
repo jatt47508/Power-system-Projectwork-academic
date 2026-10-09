@@ -19,7 +19,7 @@ Built as a university project for **Group 3, Department of Electrical and Electr
 | **Voltage Lab** | Single/three-phase calculator for line current, resistive loss, voltage drop, and efficiency, with live charts of current-vs-voltage and loss-vs-voltage. |
 | **Calculations** | Feeder/distributor conductor calculator (material, size, length, temperature, permissible drop) plus a multi-load distributor voltage profile. |
 | **Numerical Examples** | Three fully worked examples with given data, formula, calculation, answer, and interpretation. |
-| **Resources** | Formula reference, glossary, downloadable formula sheet, project report PDF, and references. |
+| **Resources** | Formula reference, glossary, downloadable formula sheet, and references. |
 | **About** | Team, guide, institution, repository link, and a QR code to the deployed site. |
 
 ## Engineering basis
@@ -43,12 +43,10 @@ GridLab/
 ├── index.html            Page structure and content
 ├── style.css             Theme, layout, dashboard styling (dark/light)
 ├── script.js             Navigation, flow diagram, classification, network explorer, examples, resources, team, QR
-├── config.js             Team names, institution, links, report path (edit here)
+├── config.js             Team names, institution, links (edit here)
 ├── js/
 │   ├── voltagelab.js     Working voltage calculator + Chart.js graphs
 │   └── feederlab.js      Feeder/distributor calculator + voltage profile
-├── report/
-│   └── PowerSystems_ReportV1.pdf
 └── README.md
 ```
 

@@ -623,7 +623,6 @@
     $("#footLine").textContent = `${CONFIG.department} &middot; ${CONFIG.group} &middot; ${CONFIG.university}`;
     $("#teamHeading").textContent = CONFIG.group;
     $("#teamEyebrow").textContent = "Team";
-    $("#reportLink").href = CONFIG.reportPdf;
 
     const rl = $("#repoLink");
     if (CONFIG.repo) { rl.href = CONFIG.repo; } else { rl.style.display = "none"; }
