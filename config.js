@@ -13,7 +13,7 @@ const CONFIG = {
   guide: "Smrutirekha Samal Ma'am",
 
   /* ---- Links (update after deployment) ---- */
-  repo: "https://github.com/jatt47508/GridLab",
+  repo: "https://github.com/jatt47508/Power-system-Projectwork-academic",
   site: "",                         // e.g. https://jatt47508.github.io/GridLab/
   reportPdf: "report/PowerSystems_ReportV1.pdf",
 
