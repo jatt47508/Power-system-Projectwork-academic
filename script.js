@@ -618,9 +618,9 @@
   function applyConfig() {
     if (typeof CONFIG === "undefined") return;
     $("#aboutIntro").innerHTML = `This site is an interactive educational project on <b>the classification of electrical distribution systems and the influence of working voltage on feeder and distributor size</b>. It was developed as part of Power Systems coursework at ${CONFIG.university}.`;
-    $("#aboutScope").textContent = `${CONFIG.department} &middot; ${CONFIG.group}. The content connects theoretical principles with practical calculations for reliable, efficient, and economical distribution design.`;
+    $("#aboutScope").textContent = `${CONFIG.department} \u00b7 ${CONFIG.group}. The content connects theoretical principles with practical calculations for reliable, efficient, and economical distribution design.`;
     $("#guideName").textContent = CONFIG.guide;
-    $("#footLine").textContent = `${CONFIG.department} &middot; ${CONFIG.group} &middot; ${CONFIG.university}`;
+    $("#footLine").textContent = `${CONFIG.department} \u00b7 ${CONFIG.group} \u00b7 ${CONFIG.university}`;
     $("#teamHeading").textContent = CONFIG.group;
     $("#teamEyebrow").textContent = "Team";
 

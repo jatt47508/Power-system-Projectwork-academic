@@ -57,7 +57,7 @@
 
     el.I.textContent = r.I.toFixed(r.I >= 100 ? 1 : 2);
     el.R.textContent = r.R < 1 ? r.R.toFixed(4) : r.R.toFixed(3);
-    el.Rnote.textContent = `${MAT[el.Mat.value].name} &middot; ${(+el.Temp.value)} &deg;C corrected &middot; ${el.Len.value} m`;
+    el.Rnote.textContent = `${MAT[el.Mat.value].name} \u00b7 ${(+el.Temp.value)} \u00b0C corrected \u00b7 ${el.Len.value} m`;
 
     el.drop.textContent = r.pct.toFixed(2);
     el.dropV.textContent = "\u2248 " + r.dV.toFixed(1) + " V line-to-line";
