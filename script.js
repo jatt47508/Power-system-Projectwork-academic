@@ -626,8 +626,6 @@
 
     const rl = $("#repoLink");
     if (CONFIG.repo) { rl.href = CONFIG.repo; } else { rl.style.display = "none"; }
-    const sl = $("#siteLink");
-    if (CONFIG.site) { sl.href = CONFIG.site; } else { sl.style.display = "none"; }
 
     const grid = $("#teamGrid");
     if (CONFIG.members && CONFIG.members.length) {
