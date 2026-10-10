@@ -64,5 +64,3 @@ Group 3 · Department of Electrical and Electronics Engineering · C. V. Raman G
 Guided by **Smrutirekha Samal Ma'am**.
 
 ---
-
-&copy; 2026 · Built by **Jatin Kumar Mallick** with **OpenCode** · for academic use
